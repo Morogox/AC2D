@@ -17,8 +17,8 @@ func _physics_process(delta):
 func _process(delta):
 	look_at(get_global_mouse_position())
 	
-func _ready():
+#func _ready():
 	# Get the current window size dynamically
-	var screen_size = get_viewport_rect().size
+	#var screen_size = get_viewport_rect().size
 	# Place player in the center
-	position = screen_size / 2
+	#position = screen_size / 2
