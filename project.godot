@@ -15,6 +15,10 @@ run/main_scene="uid://daaibwlrdvici"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Assets/Sprites/icon.svg"
 
+[display]
+
+window/size/mode=2
+
 [input]
 
 ui_left={
