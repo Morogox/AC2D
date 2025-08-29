@@ -1,7 +1,9 @@
 extends CharacterBody2D
 # Movement speed in pixels per second
 var speed = 1000
-
+var acceleration = 5000  
+var max_speed = 1500     
+var friction = 8000      
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 
@@ -9,16 +11,15 @@ func _physics_process(delta):
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 
-	input_vector = input_vector.normalized() * speed
-	velocity = input_vector
+	input_vector = input_vector.normalized()	
+	if input_vector != Vector2.ZERO:
+		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
+	else:
+		# Apply friction if no input
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	move_and_slide() 
 
 #Changes done within this function are visual only
 func _process(delta):
 	look_at(get_global_mouse_position())
 	
-#func _ready():
-	# Get the current window size dynamically
-	#var screen_size = get_viewport_rect().size
-	# Place player in the center
-	#position = screen_size / 2
