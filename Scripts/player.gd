@@ -1,11 +1,13 @@
 extends CharacterBody2D
 var input_vector = Vector2.ZERO
 
+enum PlayerState { IDLE, MOVING, QBOOSTING }
+var state = PlayerState.IDLE
 # Movement speed in pixels per second
 var speed = 1000
 var acceleration = 3000  
 var max_speed = 1500     
-var friction = 8000     
+var friction = 4000     
 var rotation_speed = 10
 
 var qBoost_speed = 1000       # The speed added during boost
@@ -29,14 +31,16 @@ func _physics_process(delta):
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 
-	input_vector = input_vector.normalized()	
 	if input_vector != Vector2.ZERO:
+		state = PlayerState.MOVING
 		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
 	else:
 		# Apply friction if no input
+		state = PlayerState.IDLE
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	
 	if is_qBoosting:
+		state = PlayerState.QBOOSTING
 		velocity = (max_speed + qBoost_speed) * qBoost_direction
 		qBoost_timer -= delta
 		if qBoost_timer <= 0:

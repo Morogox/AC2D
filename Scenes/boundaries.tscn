@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1akjn2tj52ak"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kry3j"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_21xkr"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6bp64"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjvhh"]
+normal = Vector2(1, 0)
+
+[node name="Boundaries" type="Node2D"]
+
+[node name="BoundaryTop" type="StaticBody2D" parent="."]
+
+[node name="BoundaryTCol" type="CollisionShape2D" parent="BoundaryTop"]
+position = Vector2(0, -5120)
+shape = SubResource("WorldBoundaryShape2D_kry3j")
+
+[node name="BoundaryBottom" type="StaticBody2D" parent="."]
+
+[node name="BoundaryBCol" type="CollisionShape2D" parent="BoundaryBottom"]
+position = Vector2(0, 5120)
+shape = SubResource("WorldBoundaryShape2D_21xkr")
+
+[node name="BoundaryRight" type="StaticBody2D" parent="."]
+
+[node name="BoundaryRCol" type="CollisionShape2D" parent="BoundaryRight"]
+position = Vector2(5120, 0)
+shape = SubResource("WorldBoundaryShape2D_6bp64")
+
+[node name="BoundaryLeft" type="StaticBody2D" parent="."]
+
+[node name="BoundaryLCol" type="CollisionShape2D" parent="BoundaryLeft"]
+position = Vector2(-5120, 0)
+shape = SubResource("WorldBoundaryShape2D_jjvhh")

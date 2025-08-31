@@ -11,8 +11,15 @@ func _process(delta):
 	var accel = (vel - prev_velocity).length() / delta
 	prev_velocity = vel
 		
-		# Get FPS
+	# Get FPS
 	var fps = Engine.get_frames_per_second()
 	
+	# Convert player state enum to string
+	var state_names = ["IDLE", "MOVING", "QBOOSTING"]
+	var state_str = state_names[player_node.state]
+	
 	# Update Label text
-	$Label.text = "Velocity: " + str(round(speed)) + "\n" + "Acceleration: " + str(round(accel)) + "\n" +"FPS: " + str(round(fps))
+	$Label.text = "Velocity: " + str(round(speed)) + "
+	" + "Acceleration: " + str(round(accel)) + "
+	" +"FPS: " + str(round(fps)) + "
+	" +"Player State: " + state_str
