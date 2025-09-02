@@ -6,6 +6,8 @@ var base_camera_spd = 15.0
 
 @export var to_mouse = 0.5
 
+@export var dodge_effects = true
+
 @export var tilt_amount = 10   # degrees
 @export var tilt_speed = 8.0
 @export var target_tilt = 0.0
@@ -21,13 +23,14 @@ func _ready():
 	make_current()
 	
 func start_dodge_effect(direction: Vector2):
-	# Scale tilt strength by how much the player is moving left/right
-	# direction.x will be -1 (left), 0 (up/down), or 1 (right), with values in between for diagonals
-	var tilt_strength = clamp(direction.normalized().x, -1.0, 1.0)
-	target_tilt = -tilt_amount * tilt_strength
+	if dodge_effects:
+		# Scale tilt strength by how much the player is moving left/right
+		# direction.x will be -1 (left), 0 (up/down), or 1 (right), with values in between for diagonals
+		var tilt_strength = clamp(direction.normalized().x, -1.0, 1.0)
+		target_tilt = -tilt_amount * tilt_strength
 	
-	# Add zoom-out effect on dodge
-	target_zoom = dodge_zoom
+		# Add zoom-out effect on dodge
+		target_zoom = dodge_zoom
 
 func _process(delta):
 	var player_pos = player.global_position 

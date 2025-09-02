@@ -15,7 +15,7 @@ var nearby = target_enemy
 
 var cursor_pos = get_global_mouse_position()
 
-@export var soft_lock_radius = 500.0  # in pixels
+@export var soft_lock_radius = 400.0  # in pixels
 @export var soft_lock_speed = 10.0  # lerp factor
 @export var full_lock_time = 0.1   # base time to switch to full lock
 @export var free_radius = 1000.0  # pixels; how far mouse can go from target before releasing lock
@@ -93,10 +93,13 @@ func _process(delta):
 	match state:
 		CrosshairState.FREE:
 			get_child(0).texture = free_sprite
+			get_child(1).global_position = global_position
 		CrosshairState.SOFT_LOCK:
 			get_child(0).texture = soft_lock_sprite
+			get_child(1).global_position = target_enemy.global_position
 		CrosshairState.FULL_LOCK:
 			get_child(0).texture = full_lock_sprite
+			get_child(1).global_position = target_enemy.global_position
 
 func _input(event):
 	if event is InputEventMouseMotion:

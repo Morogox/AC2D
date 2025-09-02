@@ -11,7 +11,7 @@ func _process(delta):
 	# reverse when reaching limits
 	if global_position.x > 3000:
 		direction = -1
-	elif global_position.x < 1000:
+	elif global_position.x < -3000:
 		direction = 1
 	pass
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://daaibwlrdvici"]
+[gd_scene load_steps=17 format=4 uid="uid://daaibwlrdvici"]
 
 [ext_resource type="Script" uid="uid://dw377tgd73n1r" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cm1ypv0i4khfh" path="res://Scenes/player.tscn" id="1_jjgbg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://b5487pqbnd0vf" path="res://Scripts/mouse.gd" id="10_6iyac"]
 [ext_resource type="PackedScene" uid="uid://73enh6o7bhxu" path="res://Scenes/enemy_1.tscn" id="10_hptm8"]
 [ext_resource type="Texture2D" uid="uid://cc0pbkdnowfbj" path="res://Assets/Sprites/sCrossHair4.png" id="11_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://dpwfo1l3lm33i" path="res://Assets/Sprites/sCrossHairHud1.png" id="11_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://crbfqohs8565c" path="res://Assets/Sprites/sCrossHair3.png" id="11_wsu2k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
@@ -49,7 +50,7 @@ player = NodePath("../Player")
 position = Vector2(382, 127)
 
 [node name="Enemy1" parent="." instance=ExtResource("10_hptm8")]
-position = Vector2(-74, -289)
+position = Vector2(-61, -546)
 
 [node name="Enemy1_2" parent="." instance=ExtResource("10_hptm8")]
 position = Vector2(116, -192)
@@ -63,8 +64,13 @@ soft_lock_sprite = ExtResource("11_wsu2k")
 full_lock_sprite = ExtResource("11_wsu2k")
 
 [node name="sCrosshair" type="Sprite2D" parent="Crosshair"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_ynf5e")
+
+[node name="sCrosshair_hud1" type="Sprite2D" parent="Crosshair"]
+self_modulate = Color(1, 1, 1, 0.219608)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("11_jkdf5")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
