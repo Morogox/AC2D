@@ -18,6 +18,8 @@ var qBoost_cd_timer = 0.0             # Tracks remaining boost cd time
 var is_qBoosting = false
 var qBoost_cd = false
 var qBoost_direction = Vector2.ZERO
+
+@onready var gunR = $Gun
 func _physics_process(delta):
 	#Rotation
 	var cursor_pos = cursor.global_position
@@ -31,6 +33,9 @@ func _physics_process(delta):
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 
+	#Firing
+	if Input.is_action_pressed("ui_fireR"):
+		gunR.shoot()
 
 	#if input_vector != Vector2.ZERO:
 		#state = PlayerState.MOVING

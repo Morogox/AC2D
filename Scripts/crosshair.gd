@@ -16,9 +16,9 @@ var nearby = target_enemy
 var cursor_pos = get_global_mouse_position()
 
 @export var soft_lock_radius = 400.0  # in pixels
-@export var soft_lock_speed = 10.0  # lerp factor
-@export var full_lock_time = 0.1   # base time to switch to full lock
-@export var free_radius = 1000.0  # pixels; how far mouse can go from target before releasing lock
+@export var soft_lock_speed = 10.0    # lerp factor
+@export var full_lock_time = 0.1      # base time to switch to full lock
+@export var free_radius = 1000.0      # pixels; how far mouse can go from target before releasing lock
 
 var soft_lock_timer = 0.0
 

@@ -12,7 +12,7 @@ var base_camera_spd = 15.0
 @export var tilt_speed = 8.0
 @export var target_tilt = 0.0
 
-@export var base_zoom = Vector2(1, 1)       # normal zoom
+@export var base_zoom = Vector2(0.3, 0.3)       # normal zoom
 @export var dodge_zoom = Vector2(0.75, 0.75) # zoom out when dodging
 @export var zoom_speed = 15.0                # how quickly it lerps
 var target_zoom = base_zoom

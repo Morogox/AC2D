@@ -1,17 +1,20 @@
 extends CharacterBody2D
-var direction = 1  # 1 = down, -1 = up
+var direction = 1  
+var speed = 1000  # pixels per second
+
 func _ready():
-	# Placeholder setup
-	print("Enemy spawned at ", global_position)
 	add_to_group("enemies")
 
-
 func _process(delta):
-	global_position.x += 1000 * delta * direction  
-	# reverse when reaching limits
+	# Update position
+	global_position.x += speed * delta * direction
+	
+	# Update velocity vector
+	velocity = Vector2(speed * direction, 0)
+	
+	# Reverse direction at limits
 	if global_position.x > 3000:
 		direction = -1
 	elif global_position.x < -3000:
 		direction = 1
-	pass
 	

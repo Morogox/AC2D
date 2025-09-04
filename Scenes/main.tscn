@@ -1,16 +1,16 @@
 [gd_scene load_steps=17 format=4 uid="uid://daaibwlrdvici"]
 
 [ext_resource type="Script" uid="uid://dw377tgd73n1r" path="res://Scripts/main.gd" id="1_8gbba"]
-[ext_resource type="PackedScene" uid="uid://cm1ypv0i4khfh" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://cm1ypv0i4khfh" path="res://Scenes/player_scene.tscn" id="1_jjgbg"]
 [ext_resource type="Texture2D" uid="uid://byc14rqdr7qkx" path="res://Assets/Sprites/sBg_grid.png" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://dvbw0f0vayhlb" path="res://Scripts/ui_canvas.gd" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://dxg863jsyfhsg" path="res://Scripts/camera_2d.gd" id="5_6bp64"]
-[ext_resource type="PackedScene" uid="uid://d1akjn2tj52ak" path="res://Scenes/boundaries.tscn" id="5_21xkr"]
-[ext_resource type="PackedScene" uid="uid://dnr0xfy60q8vg" path="res://Scenes/walls.tscn" id="6_6bp64"]
+[ext_resource type="PackedScene" uid="uid://d1akjn2tj52ak" path="res://Scenes/boundaries_scene.tscn" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://dnr0xfy60q8vg" path="res://Scenes/walls_scene.tscn" id="6_6bp64"]
 [ext_resource type="Texture2D" uid="uid://b5dnubr70jus0" path="res://Assets/Sprites/sCrossHair2.png" id="8_ynf5e"]
-[ext_resource type="Script" uid="uid://evi7hqo4ltu0" path="res://Scripts/sCrosshair2D.gd" id="9_hptm8"]
+[ext_resource type="Script" uid="uid://evi7hqo4ltu0" path="res://Scripts/crosshair.gd" id="9_hptm8"]
 [ext_resource type="Script" uid="uid://b5487pqbnd0vf" path="res://Scripts/mouse.gd" id="10_6iyac"]
-[ext_resource type="PackedScene" uid="uid://73enh6o7bhxu" path="res://Scenes/enemy_1.tscn" id="10_hptm8"]
+[ext_resource type="PackedScene" uid="uid://73enh6o7bhxu" path="res://Scenes/enemy_1_scene.tscn" id="10_hptm8"]
 [ext_resource type="Texture2D" uid="uid://cc0pbkdnowfbj" path="res://Assets/Sprites/sCrossHair4.png" id="11_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://dpwfo1l3lm33i" path="res://Assets/Sprites/sCrossHairHud1.png" id="11_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://crbfqohs8565c" path="res://Assets/Sprites/sCrossHair3.png" id="11_wsu2k"]
@@ -43,10 +43,11 @@ limit_bottom = 1486618624
 position_smoothing_speed = 100.0
 script = ExtResource("5_6bp64")
 player = NodePath("../Player")
+base_zoom = Vector2(1, 1)
 
 [node name="Boundaries" parent="." instance=ExtResource("5_21xkr")]
 
-[node name="Walls" parent="." instance=ExtResource("6_6bp64")]
+[node name="Walls" parent="." groups=["object"] instance=ExtResource("6_6bp64")]
 position = Vector2(382, 127)
 
 [node name="Enemy1" parent="." instance=ExtResource("10_hptm8")]
@@ -62,6 +63,7 @@ player = NodePath("../Player")
 free_sprite = ExtResource("8_ynf5e")
 soft_lock_sprite = ExtResource("11_wsu2k")
 full_lock_sprite = ExtResource("11_wsu2k")
+full_lock_time = 60.0
 
 [node name="sCrosshair" type="Sprite2D" parent="Crosshair"]
 scale = Vector2(0.25, 0.25)
