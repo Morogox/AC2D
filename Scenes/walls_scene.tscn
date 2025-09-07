@@ -7,7 +7,7 @@ size = Vector2(256, 256)
 
 [node name="Wall1" type="Node2D"]
 
-[node name="Wall1Static" type="StaticBody2D" parent="."]
+[node name="Wall1Static" type="StaticBody2D" parent="." groups=["object"]]
 
 [node name="WallCol" type="CollisionShape2D" parent="Wall1Static"]
 shape = SubResource("RectangleShape2D_cxhnf")

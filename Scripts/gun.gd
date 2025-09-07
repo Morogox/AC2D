@@ -5,11 +5,23 @@ extends Node2D
 @onready var muzzle = $Muzzle   # Marker2D
 
 @export var damage = 100
-@export var bullet_speed = 2000
+@export var bullet_speed = 6000
 
 var target_angle = null
 var cooldown := 0.5
 var timer := 0.0
+
+@onready var flash = $sMuzzleFlash
+var flash_time := 0.05   # how long to show the flash (seconds)
+
+var recoil_strength := 10.0
+var recoil_decay := 20.0
+var recoil_offset := Vector2.ZERO
+var default_offset := Vector2.ZERO
+
+func _ready():
+	default_offset = position  # where the gun normally sits
+	
 func _process(delta):
 	timer = max(timer - delta, 0.0)
 	
@@ -26,16 +38,37 @@ func _process(delta):
 	else:
 		target_angle = (crosshair.global_position - global_position).angle()
 		global_rotation = lerp_angle(global_rotation, target_angle, delta * rotation_speed)
+	
+	# Smoothly return to center
+	recoil_offset = recoil_offset.move_toward(Vector2.ZERO, recoil_decay * delta)
+	position = default_offset + recoil_offset
 
 func shoot():
 	if timer > 0.0:
 		return
 	timer = cooldown
+	# show muzzle flash
+	flash.show()
+	flash.rotation = randf_range(-0.1, 0.1)  # optional: small random tilt
+	# hide it again shortly
+	get_tree().create_timer(flash_time).timeout.connect(flash.hide)
+	
+	# RECOIL
+	# world-space kick (backwards along barrel)
+	var world_kick = (-Vector2.RIGHT).rotated(global_rotation) * recoil_strength
+	# convert the world displacement into parent's local-space delta
+	var parent_node = get_parent()
+	var curr_global = global_position
+	var new_global = curr_global + world_kick
+	var local_delta = parent_node.to_local(new_global) - parent_node.to_local(curr_global)
+	recoil_offset += local_delta
+	
+	# Spawn bullet
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = muzzle.global_position
 	bullet.rotation = global_rotation
 	bullet.damage = damage  # pass damage to bullet
-	bullet.speed = bullet_speed  # pass damage to bullet
+	bullet.b_speed = bullet_speed  # pass damage to bullet
 	get_tree().current_scene.add_child(bullet)
 
 # Predict where to shoot to hit a moving target

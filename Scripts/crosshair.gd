@@ -3,6 +3,8 @@ extends Node2D
 @export var free_sprite: Texture2D
 @export var soft_lock_sprite: Texture2D
 @export var full_lock_sprite: Texture2D
+
+
 enum CrosshairState {
 	FREE,       # Following the cursor normally
 	SOFT_LOCK,  # Slowly lerping toward an enemy
